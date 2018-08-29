@@ -3,11 +3,13 @@ import 'package:html_builder/html_builder.dart';
 import 'package:mariposa/mariposa.dart';
 import 'package:mariposa_bulma/mariposa_bulma.dart';
 import 'package:zen/zen.dart';
+import 'example_app_navbar.dart';
 
 class ExampleApp extends Widget {
   @override
   Node render() {
     return z('example-app', [
+      ExampleAppNavbar(),
       Container(children: [
         text('Hello!!!'),
         Tags(
