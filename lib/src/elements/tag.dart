@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:html_builder/html_builder.dart';
 import 'package:mariposa/mariposa.dart';
 
@@ -34,9 +35,23 @@ class Tag extends Widget {
 
   final Map<String, dynamic> props = {};
 
+  StreamSubscription _onClick;
+
   Tag({this.child, this.onDelete, Map<String, dynamic> props: const {}}) {
     assert(child != null || onDelete != null);
     this.props.addAll(props ?? {});
+  }
+
+  @override
+  void afterRender(AbstractElement element) {
+    if (onDelete != null) {
+      _onClick = element.listen('click', (_) => onDelete());
+    }
+  }
+
+  @override
+  void beforeDestroy(AbstractElement element) {
+    _onClick?.cancel();
   }
 
   @override

@@ -1,12 +1,17 @@
 import 'dart:html';
 import 'package:mariposa/dom.dart' as mariposa;
-import 'widgets/example_app.dart';
+import 'src/state.dart';
+import 'widgets/gallery_app.dart';
 
 void main() {
   var container = document.querySelector('#app');
-  var exampleApp = () {
-    return ExampleApp();
+  var state = new GalleryAppState();
+
+  var galleryApp = () {
+    return GalleryApp(
+      state: state,
+    );
   };
 
-  mariposa.render(exampleApp, container);
+  mariposa.render(galleryApp, container);
 }
